@@ -30,12 +30,26 @@ public class SystemDBImpl implements SystemDB {
         }
     }
 
+    /**
+     * Retrieves an account by its unique identifier.
+     *
+     * @param accountId The unique identifier of the account to retrieve.
+     * @return The account associated with the specified identifier.
+     * @throws AccountNotFoundException If no account exists with the provided identifier.
+     */
     @Override
     public Account getAccountById(Long accountId) {
         if(!accounts.containsKey(accountId)) throw new AccountNotFoundException("Account with id: " + accountId + " doesn't exist");
         return accounts.get(accountId);
     }
 
+    /**
+     * Adds a new account to the system with the specified unique identifier.
+     *
+     * @param accountId The unique identifier for the new account.
+     * @param account The account to be added.
+     * @throws AccountExistsException If an account with the provided identifier already exists.
+     */
     @Override
     public void addAccount(Long accountId, Account account) throws AccountExistsException {
         if(accounts.containsKey(accountId)) throw new AccountExistsException("Account with id: " + accountId + " already exists");
